@@ -1,0 +1,26 @@
+
+COMPILER=clang++-mp-3.2
+COMPILER=g++-mp-4.8
+STANDARD=c++11
+BOOST_INC=-I/opt/include
+BOOST_LIB=-L/opt/local/lib
+CGAL_INC=-I/opt/local/include
+CGAL_LIB=-L/opt/local/lib -lCGAL_Core -lCGAL
+TEST_LIBS=-lboost_unit_test_framework-mt -lboost_program_options
+TEST_LIBSA=-lboost_unit_test_framework
+TEST_DEFS=-DBOOST_TEST_NO_AUTO_LINK
+TEST_DEFS=-DBOOST_TEST_DYN_LINK
+
+simplex: main.cpp simplex.hpp
+	$(COMPILER) -std=$(STANDARD) $(BOOST_INC) $(BOOST_LIB) main.cpp -o simplex
+
+test: test.cpp simplex.hpp
+	$(COMPILER) -frounding-math -std=$(STANDARD) $(BOOST_INC) $(BOOST_LIB) $(CGAL_INC) $(CGAL_LIB) $(TEST_LIBS) $(TEST_DEFS) test.cpp -o test
+
+rips: rips.cpp
+	$(COMPILER) -std=$(STANDARD) -frounding-math rips.cpp $(CGAL_INC) $(CGAL_LIB) -o rips
+
+
+clean:
+	rm -f test simplex
+	

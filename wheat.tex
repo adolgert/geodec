@@ -1,0 +1,225 @@
+\documentclass{article}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{palatino}
+\usepackage[pdftex]{graphicx}
+
+\newcommand{\wsr}{\textsc{WSR}}
+
+\title{Wheat Stem Rust and the Cereal Disease Laboratory Dataset}
+\author{Marshall, Drew, Dave, Chris}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Wheat Stem Rust, or \wsr, is a disease of wheat, oat, barley, and rye, caused by
+the fungus \textit{Puccinia Gramminis}, f.~sp.\ \textit{tritici} (special form for wheat). It infects crops worldwide and, in the United States, travels yearly from South to North, covering most of the country. As a nationwide, airborne crop disease, it is an example of how one of the most costly pathogens, \textsc{UG99}, might enter the U.S.
+
+The \href{http://www.ars.usda.gov/main/site_main.htm?modecode=36-40-05-00}{Cereal Disease Laboratory} of the Agricultural Research Service has, for many years, collected samples of \wsr\ during the wheat growing season. These are laboratory-verified sightings of infection, identified by the county where they were observed.
+
+This document will summarize an epidemiological view of the spread of \wsr\ and then look at how the Cereal Diseas Lab's dataset might support modeling of that spread.
+
+\section{Spread of Wheat Stem Rust}
+Wheat Stem Rust has a complex life cycle. After infection, wheat takes about seven days to produce lesions. Ten days after infection, depending on the weather, it produces rust-colored urediniospores. These are light, fly well on air currents, and can infect other wheat plants. Later in the season, the same wheat plants produce black spores which can infect alternate hosts, especially Barberry bushes. The fungus can last over winter on Barberry, and it is there that it sexually reproduces. Some spores may survive under snow cover, as well, or in tillage. In the Spring, Barberry produces aeciospores which infect wheat, starting the cycle again.
+
+Rust infections are either from local sources, which are Barberry bushes in the North and volunteer (not purposefully planted) wheat in the South, or from remote sources, meaning they were blown from South to North. The timing of Wheat emergence and harvest determines which crops will be planted at the right time to become infected and which will be infected long enough to produce spores. Infections of wheat take about ten days to produce spores that can infect other wheat.
+
+The main types of wheat in the U.S.\ are classified as Hard or Soft Red, Hard or Soft White, and Durum. Each variety has a different chance of infection and rate of spore production, but the most important difference is whether they are Winter or Summer wheat varieties. Winter wheat is planted in the Fall and harvested in the Spring. Winter Wheat tends to be planted in the South, and it matures earlier in the Spring than Spring Wheat, so the middle states, where Winter Wheat might not yet be harvested before Spring Wheat is planted, could be an important bridge for airborne \wsr.
+
+When \wsr\ produces spores on a plant, those spores can reinfect the same plant, neighboring plants, or enter the long-range wind flows, called synoptic-scale flows, where the deposition distance is a hundred kilometers or more. Some spores may make it into long-range wind patterns at any time, but windy storms and combines used for harvest may be crucial events for spreading urediniospores into the atmosphere. Local spread has been called ``explosive'' or ``geometric.''
+
+An excellent primer on Wheat Stem Rust is at \href{http://www.apsnet.org/edcenter/intropp/lessons/fungi/Basidiomycetes/Pages/StemRust.aspx}{APSnet}. Another useful source is \textit{Wheat Health Management} by Cook and Veseth, published by APS Press.
+
+
+\section{Cereal Disease Laboratory Rust Survey}
+
+USDA field agents and wheat breeders send samples of wheat to the USDA Agricultural Research Service for testing to identify \wsr. Breeders might
+send samples out of curiosity whether the race of the infecting rust matches that airborne from the South or whether it comes from a local Barberry bush they need to extirpate. States like New York see \wsr\ so rarely that any observation is interesting enough to send. This dataset records positive observations of \wsr\ and is used for rough, state-sized granularity, estimates of the spread of disease.
+
+Practical guidelines for \wsr\ suggest that a uniformly-infected field was probably infected from airborne sources, especially if top leaves show some signs of infection. Sometimes infection radiates from a Barberry bush. Spots of infection may come from tillage, but they may also have airborne sources. While it is possible to spot \wsr\ early in plant development, it is harder to see on young plants; they are less likely to make it through tillering, the early growth stages. Infection is most noticeable near heading of the wheat.
+
+The Cereal Disease Laboratory curates data as far back as 1919. The detail of the dataset varies over the years, but a portion covering 1987--2001 has the following columns:
+
+\medskip
+
+\noindent\newcommand{\rdatcol}[2]{#1 & #2 \\ \hline}
+%
+\centerline{\begin{tabular}{| l | p{10cm} |}
+\hline
+\rdatcol{year}{year of observation.}
+\rdatcol{collection number}{index that is unique for a particular visit to a field.}
+\rdatcol{isolate}{index of samples for a single field visit, so this takes the values 1, 2, 3.}
+\rdatcol{collection date}{In later years, this date is fully-specified, but observations in earlier years sometimes lack day of the month.}
+\rdatcol{state}{A few times a county listed is in a different state with similar two letter postal code.}
+\rdatcol{county}{This is the most precise location specified. It is sometimes a city limit, not a county. The county spellings can be approximate, but most are identifiable as unique within a state.}
+\rdatcol{host code}{This refers to the infected host, which includes oats. This distinguishes winter wheat and spring wheat.}
+\rdatcol{race}{This is the race of pathogen. Some races will show a prevalent South to North pattern of observation, indicating airborne spread.}
+\rdatcol{crop stage (Romig Scale)}{The Romig Scale is a rarely-used categorical measure
+of how much the plant has grown. For instance, the leaf count can matter. Observers will tend to report using the Feekes scale, while most scholarly publications use the Zadoks scaled. While it is possible to see infection in seedlings, early spotting is easier later in tillering stages. Infected seedlings also have a higher chance of not making it to later stages.}
+\rdatcol{cultivar}{Especially later measurements identify specific cultivars.}
+\rdatcol{severity}{Severity is an estimate of the percentage of the surface of the plant that is covered with rust. Severity of infection can differ greatly depending on the exact host.}
+\rdatcol{prevalence}{Prevalence is a measure of how much of the field has rust. Localized infections, radiating outwards, can be a sign of infection from overwintering or alternate hosts. High prevalence infections can be signs of airborne deposition.}
+\rdatcol{source}{Whether infected wheat was in a nursery or a field.}
+\rdatcol{ecological area}{The ecological area is a number indicating a zone. Fig.~\ref{fig:ars_areas} shows the areas.}
+\end{tabular}}
+
+\medskip
+
+\begin{figure}
+\centerline{\includegraphics[width=8cm]{wsr_areas}}
+\caption{Ecological areas, as defined by ARS and used in recording wheat rust observation locations.\label{fig:ars_areas}}
+\end{figure}
+
+Before proceeding, let's problematize the data with practical observations.
+The many wheat varieties grow at different rates, so the crop stage will not be a uniform indicator of how long ago the wheat was planted. Severity of infection will vary greatly, even if observation was the same number of days since infection, so prevalence is, \textit{a priori}, considered more trustworthy. Even so, high prevalence in a field can indicate an initial, uniform infection from the air, or it can indicate that an initial localized infection multiplied through a field. While there may be multiple observations of rust in a county, there is no indication which fields were reported.
+
+Farmers' bulletins suggest spraying when weather conditions promote \wsr, so it will fail to
+infect when otherwise it would.
+
+Most importantly, these observations do not come from test plots checked at regular intervals. They are therefore highly-correlated. People look for rust after muggy days with cool nights, or they look when email alerts tell them there have been sightings in counties to the South. In some counties, any observation of \wsr\ is reported because it is novel. In others, people figure out that \wsr\ is in the area, and they don't report it because they know what it is and how to handle it. These considerations do not make for optimal experimental design for epidemiological inference and prediction.
+
+With this data, the Cereal Disease Laboratory is able to estimate progress of \wsr\ each year with approximately state-level granularity. They issue bulletins which look like Fig.~{\ref{fig:bulletin}}.
+
+\section{Questions}
+
+A very simple model for \wsr\ is a spatial time series for the density, $\rho$, of rust in locations, $A$ and neighbors $B$,
+\begin{equation}
+	P(\rho_A(t+1))=f(\rho_A(t), \rho_B(t), |\vec{x}_A-\vec{x}_B|),
+\end{equation}
+where $\vec{x}$ is the location of $A$ or $B$.
+We could simplify this model further if we consider not density but presence of infection, $I$, anywhere in the county.
+\begin{equation}
+	P(I_A(t+1))=f(I_A(t), I_B(t), |\vec{x}_A-\vec{x}_B|).
+\end{equation}
+Neither of these models incorporate sporulation. Even including a wind-dependent term, as in
+\begin{equation}
+	P(I_A(t+1))=f(I_A(t), I_B(t), w(\vec{x}_A,\vec{x}_B)),
+\end{equation}
+doesn't explicitly model spores. This equation instead uses wind to correlate observations of infection.
+
+If the dataset contained absence observations, in addition to the presence observations, we could fit the above equations. We could impute absence observations by suggesting, for instance, that the likelihood of infection decreases for times before observation of infection. This raises an important biological question: when is the wheat infected?
+
+The \textit{History of Wheat Stem Rust} concludes, from presentations about biological warfare research, that ``we now know infection in a plant in North Dakota came directly 2500~km from Texas.'' Don Aylor's paper measures the Northward progression of rust observations, in the same Cereal Disease Laboratory dataset, and concludes they are not significantly different from the greening wave, which means wheat plants in the North are infected as soon after planting as those in the South. This is equivalent to a hypothesis that there are usually spores already on the ground when the tillers emerge.
+
+This dataset is a large record of infections from airborne plant pathogens. Can it be used to validate a way to model the movement of spores?
+
+While we have a detailed understanding of the life cycle of \wsr, we might ask some general questions.
+
+\begin{itemize}
+\item Is wheat often infected as soon as it emerges? Suggestions from the primer, mentioned above, indicate that northern regions are infected ``several weeks'' later than they would have been infected by local sources, now that Barberry is reduced. Don Aylor's paper suggests that infections follow the slope of corn planting, which follows the greening wave and is near the time wheat emerges.
+
+\item What percentage of the U.S.\ Wheat, Rye, Barley, and Oat is infected at any point in time?
+
+\item What are the controlling factors that determine whether a year will have an epidemic? Is it more important that there be several early ten day cycles of infection in the South before travel North, or should there be early travel Northward first?
+
+\item What if we treat this dataset as the first observation of a new pathogen?
+Every observation asks where the spores originated and what were the conditions
+for deposition, infection, and germination.
+
+\item How do we know, from looking at the heads-up display of current observations of infection,
+whether a cluster of them is UG99?
+
+\end{itemize}
+
+\section{The Pan-spore Hypothesis}
+How can we measure the likelihood that spores are common enough that infection depends
+only on proper environmental conditions? Start with a model that depends on environmental factors
+but does not depend on space. Then look for spatial correlation in the residuals, which would be a sign
+that the model needs to include a spatial component.
+
+We use first passage data, meaning the date of the first report of \wsr\ in a county each year.
+This is a categorical variable, with the categories \textit{uninfected} and \textit{infected}.
+A typical statistical analysis would use
+\begin{equation}
+	\mbox{logit}(y) = \ln\left(\frac{p_i}{1-p_i}\right) = \beta X_i,
+\end{equation}
+where $X$ are observations and $\beta$ is a set of weights. The logistic function assigns a probability to being in one of the two states. We could contrive a linear set of observations using a distance from the known optimal high temperature, low temperature, and hours of dew, necessary for \wsr\ to germinate. Those temperatures and dew points come from kriging on the standard NOAA historical weather record. This could be done county-wide, or it could be done for every location that has wheat, according to land use data.
+
+Construction of the $X_i$ involves some choices, so the results would have to be tested for dependency on those choices. A linear formulation, using a high for the day, $h$, a low for the night, $l$, and the number of hours of dew, $d$, would be
+\begin{eqnarray}
+	x_h & = & |h-h_0| \\
+	x_l & = & |l-l_0| \\
+	x_d & = & d
+\end{eqnarray}
+The variances should be similar, were there any inference to do using the logistic regression.
+The hours of dew probably has a much different distribution from the others, which could be
+plotted and corrected with a transformation function. Having no hours of dew would, appropriately, set the whole probability for that day to zero, as well.
+
+That function above describes the likelihood of germination on a particular day. We need the likelihood of germination at any time between planting and seven days before observation. We can estimate planting from the given growth stage of the infected field.  The probability of having any day's environmental conditions proper for infection is additive, so the probability over
+many days is added according to standard rules,
+\begin{eqnarray}
+	p(A|B) & = & p(A)+p(B)-p(A)p(B) \\
+	p(A|B|C) & = & p(A)+p(B) + p(C) -p(A)p(B) -p(A)p(C) -p(B)p(C) +p(A)p(B)p(C).
+\end{eqnarray}
+This gives us, for every county, every year, a predicted probability of infection. We could even truncate the summation and use this to predict an infection by a particular date.
+
+Dave points out that the above equation isn't correct. I need to calculate the probability of
+infection on any day before today. It's a different equation, where you include the probability
+of infection on two days, or on three, and so on. If this were a simpler problem that 
+measured probability as a true or false, then we could treat this like the hamburger topping problem, where there are $2^n$ different toppings, minus the one without any toppings.
+If we name the probabilities $x_i$, then calculations for two days look like
+\begin{eqnarray}
+  p(x_0=1) & = & x_0(1-x_1) \\
+  p(x_1=1) & = & (1-x_0)x_1 \\
+  p(x_0\:\mbox{or}\:x_1) & = & x_0-x_0x_1+x_1-x_0x_1 - x_0x_1(1-x_0)(1-x_1) \\
+  p(x_0\:\mbox{and}\:x_1) & = & x_0x_1(1-x_0)(1-x_1) \\
+  p(\mbox{any}) & = & x_0+x_1-2x_0x_1.
+\end{eqnarray}
+
+It might also be possible to use the above logistic model, and some Bayesian MCMC, in order to estimate the optimal temperatures for infection. Otherwise, nothing described so far is
+inferential. The model produces a probability of infection, which is a step removed from 
+the probability of observation, which could be excluded, or it could be included as a 
+Bernoulli distribution. If we calculated probability of infection for individual plaquettes
+of land use, then that would give a percentage infected area to use as a density to use, as 
+a refinement on the probability of observation of \wsr\ in a county.
+
+What are the residuals, whose correlations would indicate spatial dependence in the
+biological process? A first residual would be whether or not a county reported as infected
+in that year, versus the predicted probability of observation of infection. This would
+give a spatial value that could be measured with Geary's C and Moran's I tests. There is
+another test, whose name I've forgotten, but which is easy to run.
+
+Using the daily predictions of infection probability could construct a more involved residual.
+What is the probability that a county reports infection by a certain day? Given the counties
+that do report infection, we can estimate the probability of observation of infection using
+a Poisson model. This model then applies as an observation process to the counties that did not report infection to produce a likelihood for the positive or negative outcome in each county
+that respects the date of the first observation.
+
+What if we see spatial correlation? First we run the same correlation tests on smaller scales to see whether only some parts are correlated. Biologically, this means winds in the South might
+cause correlation there. One approach, at this point, is to use wind patterns or simple proximity
+measures to analyze the residuals. Another would be to construct the same spatial model on
+the initial data, without accounting for weather. The last would be to construct a joint model,
+where a parameter tunes between the significance of spatial or environmental influences. The
+problem with this, and the reason we don't start with this sort of model, is that continuity
+of the environment (my weather is my neighbor's weather) would make it difficult to 
+assign variation in the observations to either term.
+
+
+\section{Analysis as a Highly Biased Spatial Point Process}
+
+Given presence-only data over a spatial area, one common statistical technique is to estimate a density from the point measurements of presence. You could imagine writing
+\begin{equation}
+  \mbox{density of infection} = f(\mbox{lat},\mbox{long}) + \mbox{growth stage} + \mbox{prevalence}.
+\end{equation}
+This kind of model attributes spatial variation to infection and treats growth stage and prevalence of infection as non-spatial covariates. The problem with this model is that we have a prior expectation that someone is much less likely to report \wsr observation in a county and host type after the first observation.
+
+Another route might be to use the same point estimate technique only using the first observation in each county. Using prevalence as a covariate would look as follows,
+\begin{equation}
+  \mbox{day of observation} = f(\mbox{lat},\mbox{long}) + \mbox{prevalence},
+\end{equation}
+but we could try different covariates to see what is most predictive.
+The difference between observation and infection is what makes this technique suspicious. There is no indication of how long it has been between infection and observation. The only sure knowledge is that there are at least seven days between infection and first signs on the plant.
+
+We test the hypothesis that the spread of infection follows the greening wave by comparing the planting dates of corn and the observations of \wsr\ infection. If we look at these in two dimensions, we see, for the years 1988--2001, that they are significantly different and that there is a trend.
+
+There is no point in using land use classifications to make locations of county centroids more precise because the dates of observation likely vary greatly in time from infection.
+
+You live in county X. This model predicts infection is possible between this day and this day. Have I told you anything? The variance of the model is a measure of internal consistency. It doesn't show consistency with some external observation.
+
+Is there a way to compare predictions based on date of observation elsewhere with predictions based on having a day in the right temperature range?
+
+\end{document}
+

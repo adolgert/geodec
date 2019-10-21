@@ -1,0 +1,132 @@
+\documentclass{article}
+
+\newcommand{\wsr}{W.S.R.}
+
+\begin{document}
+
+
+Here are some of the pieces I'm looking at.
+
+\begin{itemize}
+
+  \item Clusters of same land use with union-find.
+
+  \item Vietoris-Rips Complex.
+  \begin{itemize}
+    \item Filtration.
+    \item Just a graph version.
+  \end{itemize}
+
+  \item Weather considerations for time-dependence.
+
+  \item Fractal measures to describe regions.
+
+  \item Read/write in spatially-sorted order.
+
+  \item Read/write and manipulate in chunks.
+
+\end{itemize}
+
+Plan of action:
+
+\begin{enumerate}
+
+  \item Read a whole GeoTIFF (a small one) into a quad complex.
+  \item Perform some operation on that complex.
+  \begin{itemize}
+    \item Union-find.
+    \item Fractal dimension.
+    \item Intersection with polygon and histogram.
+  \end{itemize}
+  \item Order the data in Peano/Hilbert or Morton order.
+  \item Load and process in chunks.
+  \item Parallelize.
+
+\end{enumerate}
+
+
+\section{Implementation of Complex}
+I'm writing the code to do union-find, and then it will be used for the Rips
+complex. There are some things I need to figure out.
+
+\begin{enumerate}
+	\item Right now it reads a 2d array into a complex and assigns vertex ids as it goes. How do I get it to read parts of a 2d array in blocks and connect it to the existing complex? It would have to search the complex for the ids to which it should attach. I'd also need a translation from (i,j) to vertex id.
+	
+	\item Read a block, with its ids, into a complex. The reader yields land use values and vertex ids at an i,j. Maybe it yields a list of vertices, and then a list of facets. They should be separate, or every time a facet lists its vertices, the builder will need to check again which vertices already exist and add those that don't. Does it return a list of vertices?
+\end{enumerate}
+
+\section{More about Rust}
+
+I spoke with Gary Bergstrom for a few minutes.
+
+This year, in New York state, Gary has seen Wheat Stem Rust on just about every host type: oat, barley, rye, and wheat. He normally doesn't see it because WSR is rare in New York. He suspects it's an infection from Barberry stands and is thinking about looking for it. When Gary reported it in past years, it was because it's rare to see. It would have been in one part of one field and nowhere else.
+
+The spores from Barberry aren't urediniospores. They are another kind of spore which spreads only locally. That means Barberry is important when it's beside a field, and that's more likely to happen in a place like New York where there are forests beside fields. After spores from Barberry infect the local field, then that field takes about ten days to produce urediniospores which can travel long distances. In the absence of an event to kick them into the atmosphere (such as large storms or combines throwing up dust), those urediniospores will reinfect local fields. The question, then, is how much time there is between infection and harvest, because reinfection causes a geometric increase in the number of spores, and they increase the likelihood of long-range jumps. There can be three-to-four generations sometimes.
+
+Wheat Stem Rust can't survive the cold. It may be possible it could survive under snow, but it's unlikely. Overwintering in Barberry is much more likely. If Winter Wheat, planted in the Fall, gets WSR, the rust will die over Winter.
+
+The forms for reporting include both severity and prevalence. Severity is an estimate of the percentage of the plant surface that is infected. This can depend greatly on the cultivar's resistance to rust, on weather, on lots of factors. More interesting epidemiologically is prevalence, which is the percent of the field that is infected. That same form asks for crop stage. Gary reports crop stage using the Feekes scale, which is the one most used in the US by farmers. For publications, they use the Zadoks scale, which is much more fine-grained. The numbers I got from NASS in their database were in Romig scale, which Gary hadn't seen.
+
+It is possible to see infection on seedlings, but early spotting is easier later in the tillering stages. Infected seedlings also have a higher chance of not making it to later stages. In New York State, infections from external sources, meaning not from local sources such as Barberry, will tend to happen later in the heading process.
+
+The five states where NASS reports percentage of wheat emerged are all places that grow hard red spring wheat. Keep in mind that different varieties of wheat are grown in different regions. Some states are transitional between winter wheat and spring wheat crops, and they act as bridges. Just as the epidemic gets cracking in winter wheat, spring wheat is at a vulnerable stage. Ontario is an example of a place that grows both.
+
+The corn stages came from a book called \emph{Wheat Health Management} by Cook and Veseth, published by APS Press. (Mann Lib SB191 .W5 C77 1991)
+
+Corn planting in New York is throughout May. Wheat plants flower around Memorial Day. He says June 4th-5th. Those are earlier in the South and may be closer to each other. We can calculate the time between corn planting and earliest detection of WSR by adding seven days for the rust to show on the stems. (It takes ten days for rust to complete a cycle, from sporulation to sporulation.)
+
+
+\section{Models}
+
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{Level of Precision} \\ \hline
+Types of Wheat & planting, harvesting dates \\
+               & susceptibility to infection \\
+\hline
+Growth rate of pathogen & \\ \hline
+Race of \wsr & local Barberry source \\
+             & versus airborne flow \\ \hline
+Wind & direction \\
+     & speed \\ \hline
+Upwelling events & harvest \\
+                 & wind storm \\ \hline
+Infection window & temperature \\
+                 & humidity \\ \hline
+Location of fields & within county \\
+\hline
+\end{tabular}
+
+Minnesota-North Dakota model tells leaf wetness.
+
+How do we know this is sufficiently different from greening alone.
+What is your null hypothesis? How do you know when you have something that is precise enough to prove a point? You need a hypothesis. In the absence of a testable hypothesis, what are we doing? Can we publish descriptive statistics? Can we say why it won't work?
+
+
+
+\begin{itemize}
+\item Smooth spread with a p.d.f, or hops?
+\item Network model?
+\item At what granularity? County, ecoregion, state, field?
+\item How do dynamics of weather interact with relative statics like field location?
+\end{itemize}
+
+\noindent\begin{tabular}{|l|}
+\hline
+Observation Properties \\ \hline
+Sparse \\
+Highly biased \\
+Positive-only \\
+\hline
+\end{tabular}
+
+
+Assumptions from a Kriging fit to spread over the U.S.
+\begin{itemize}
+\item There is a single geographic covariance structure. This is equivalent to saying there is a single p.d.f. For wind dependence, this would be the p.d.f. with wind, since wind is Northward and travel of infection is Northward.
+\item We don't care where the fields are. This model predicts whether a field would be infected, were it to exist.
+\item This is the earliest possible infection time, offset by the time to discover infection. Only some fields are infected. The shape of this curve will depend on weather that year and on the field structure. (Given a field structure, what variations in weather create the possibility for different rates of spread, given the hopping nature of the infection?)
+\end{itemize}
+
+\end{document}
+

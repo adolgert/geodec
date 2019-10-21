@@ -1,0 +1,1 @@
+void blah<double>(int duh)

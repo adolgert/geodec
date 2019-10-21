@@ -1,0 +1,60 @@
+
+Kolmer, J.A. 2005, Tracking Wheat Rust on a continental scale. Curr. Opinion Plant Biol. 8:441-449
+
+Roelfs A.P. 1985. Wheat and Rye Stem Rust, pg 3-37 in The Cereal Rusts, Academic Press
+
+Joshi, L.M. Perpetuation and Dissemination of wheat rusts in India, pg 41-68, in Problems and Progress of Wheat Pathology in South Asia, 1986. ed. Joshi, Singh D.V., Srivastava K.D.
+
+====
+
+Frank, Cardwell, Ciha, Wilhelm, 1997. Growth Staging in research and crop management. Crop Sci. 37:1039-40.
+
+Landes, Prter, 1989. Comparison of scales used for categorizing the development of wheat, barley, rye, oats. Ann Appl. Biol. 115:343-360.
+
+Bauer, Smika, Back. 1983. Correlation of five wheat growth stage scales used in the Great Plains. USDA-ARS Publ. ATT-NC-7. Peoria, IL.
+
+Harrell, Wilhelm, McMaster 1998. SCALES-2 Agron. J. 90:235-8
+
+=============
+In the McMaster summary on wheat growth:
+
+AFRCWHEAT 1/2 Porter 1984, 1993
+APSIM Asseng 1998
+DSSAT/CERES-Wheat/CropSim Ritchie and Offer 1985, Hunt and Parajasingham
+Sirius - Jamieson, 1995, 1998
+SUCROS - van Laar 1992
+SWHEAT - van Keulen 1987
+WINTER WHEAT Baker 1985
+Modwht3 - Rickman 1996
+SHOOTGRO - McMaster 1992, Zalud 2003
+PhenologyMMS - arsagsoftware.ars.usda.gov
+
+Hargreaves, J. N. G., McMaster, G. S., 2008, A canonical composition of phytomers, Proc 2008 Int. Symp. on Crop Modeling and Decision Support. klia.cn/iscmds/
+
+==================
+
+Roelfs, A.P. 1989. Epidemiology of cerial rusts in North America. Can J. Plant Pathol. 11:86-90.
+
+Severe epidemics were in 1916, 1919, 1935-7, 1950-54.
+Spatial variation in a field of wheat development: Masle-Meynard and Sebillotte 1981.
+
+Phenology is external development.
+
+Plants that have received a first inoculation of rust do not appear to react to later inoculations.
+
+Frequency of days with six or more hours of moisture (dew) at 10 C or higher is what correlates best with infection.
+
+=======================
+
+Large 1954. Growth stages in cereals: an introduction to the Feekes Scale.
+Wheat climate relationships. SB191.W5.N98. Older book but has dates for planting and growth.
+
+Modelling and Experimental studies of the growth and development of wheat. John R. Porter. Mann SB191.W5.P67x 2000. AFRCWHEAT2.
+H. Anton De Bary 1853, German.
+
+=====================
+
+Alternate hosts are Barberis, Mahonia, and something like Barbermahonia (not quite).
+
+Ed. by Brett F. Carver, Wheat Science and Trade. 2009. Ch. 5. Diseass which challenge global wheat production - the Wheat Rusts. by James Kolmer, Xianming Chen, Yue Jin. pg 89-124. Epidemics happen in Spring wheat and Durum in MN, SD, ND. Also says infection temperatures are 15-24 C, with a max of 30C, and growth temps are 25-35 C with a max of 40 C. Dew at six housr optimal for germination and infection.
+
